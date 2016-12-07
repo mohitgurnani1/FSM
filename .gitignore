@@ -1,4 +1,14 @@
-*.class
+#Eclipse Config Files
+/.settings/
+.classpath
+.project
+.springBeans
+
+#Idea Config Files
+/.idea/
+/src/main/webapp/resources/.idea/
+*.eml
+*.iml
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
@@ -8,10 +18,23 @@
 *.war
 *.ear
 
+# TS Compilation Files #
+*.js.map
+/src/main/webapp/resources/app/**/*.js
+
+# Node and NPM Files
+/src/main/webapp/resources/node_modules/
+/src/main/webapp/resources/node/
+/src/main/webapp/resources/npm-debug.log
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 /target/
 
-/.settings/
-/.idea/
+/bin/
+
+# Restricting Accesss to app.properties File in Repository
+/config/app.properties
+
+# Temporarily Bolcking pom.xml
+/pom.xml

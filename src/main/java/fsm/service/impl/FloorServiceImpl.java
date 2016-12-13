@@ -41,6 +41,16 @@ public class FloorServiceImpl implements FloorService {
     }
 
     @Override
+    public boolean doesFloorExists(int floorId) {
+        Floor floor=getFloorById(floorId);
+        if(floor.getTables()==null)
+            return false;
+        return true;
+    }
+
+
+
+    @Override
     @Transactional
     public List<Floor> getAllFloors() {
         return floorDao.getAllFloors();

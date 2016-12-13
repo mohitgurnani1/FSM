@@ -16,6 +16,8 @@ import fsm.model.domain.Country;
 import fsm.service.CountryService;
 import fsm.util.JsonFilter;
 
+import javax.xml.ws.Response;
+
 @RestController
 @RequestMapping(value = "/countries")
 public class CountryRestController {
@@ -23,21 +25,21 @@ public class CountryRestController {
 	@Autowired
 	private CountryService countryService;
 
-	@RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public String getAllCountries() throws JsonProcessingException {
 		List<Country> countries = countryService.getAllCountries();
 		String[] propsToBeIgnored = { "cities" };
 		return JsonFilter.filter(countries, propsToBeIgnored);
 	}
 
-	@RequestMapping(value = "/{countryId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/{countryId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public String getCountryById(@PathVariable("countryId") int countryId) throws JsonProcessingException {
 		Country country = countryService.getCountryById(countryId);
 		String[] propsToBeIgnored = { "cities" };
 		return JsonFilter.filter(country, propsToBeIgnored);
 	}
 
-	@RequestMapping(value = "/{countryId}/cities", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/{countryId}/cities", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public String getCitiesInCountry(@PathVariable("countryId") int countryId) throws JsonProcessingException {
 		List<City> cities = countryService.getCountryById(countryId).getCities();
 		String[] propsToBeIgnored = { "country", "locations" };

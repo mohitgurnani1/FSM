@@ -13,6 +13,8 @@ public interface FloorService {
 
 	public void updateFloor(Floor floor);
 
+	public boolean doesFloorExists(int floorId);
+
 	public Floor getFloorById(int floorId);
 
 	public List<Floor> getAllFloors();

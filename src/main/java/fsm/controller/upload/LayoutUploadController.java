@@ -51,10 +51,29 @@ public class LayoutUploadController {
         return JsonFilter.filter(unpublishedLayout.getFloor(), propsToBeIgnored);
     }
 
+
     @RequestMapping(value = "/publish", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
-    public void publishLayout(@RequestParam("toBePublished") boolean toBePublished) {
+    public boolean publishLayout(@RequestParam("toBePublished") boolean toBePublished) {
         if(toBePublished) {
+
+            if(floorService.doesFloorExists(unpublishedLayout.getFloorId()))
+                return false;
+
+            Floor floor = unpublishedLayout.getFloor();
+            floor.setId(unpublishedLayout.getFloorId());
+            floorService.updateFloor(floor);
+        }
+
+        unpublishedLayout.setFloor(null);
+        return true;
+    }
+
+    @RequestMapping(value = "/publishOverwrite", method = RequestMethod.POST)
+    @ResponseStatus(value = HttpStatus.OK)
+    public void overwritePublishLayout(@RequestParam("overwritePublish") boolean overwritePublish) {
+        if(overwritePublish) {
+
             Floor floor = unpublishedLayout.getFloor();
             floor.setId(unpublishedLayout.getFloorId());
             floorService.updateFloor(floor);
@@ -62,6 +81,9 @@ public class LayoutUploadController {
 
         unpublishedLayout.setFloor(null);
     }
+
+
+
 }
 
 
